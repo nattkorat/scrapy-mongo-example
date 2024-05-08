@@ -11,7 +11,7 @@ After having the complete set of mongoDB installation and configuration, you nee
     MONGO_DB={database_name}
 
 
-## Custome on the `settings.py` file
+## Custom on the `settings.py` file
 
 In the `settings.py` of the scraper project, we need to enable the code to config with the mongoDB as below:
 
