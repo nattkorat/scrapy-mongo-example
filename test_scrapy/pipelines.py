@@ -5,16 +5,13 @@
 
 
 # useful for handling different item types with a single interface
-import pymongo
 from itemadapter import ItemAdapter
 from test_scrapy import settings
+from test_scrapy import model
 
 
 class TestScrapyPipeline:
-    client = pymongo.MongoClient(settings.MONGO_URI)
-    db = client[settings.MONGO_DB]
 
     def process_item(self, item, spider):
-        self.db[spider.name].insert_one(dict(item))
 
         return item

@@ -74,8 +74,11 @@ ITEM_PIPELINES = {
 }
 
 # Adding Mong URI and DB constant
-MONGO_URI = os.getenv("MONGO_URI") or "mongodb://localhost:27017/"
-MONGO_DB = os.getenv("MONGO_DB") or "defautl_db"
+MONGO_HOST = os.getenv("HOST")
+PORT = os.getenv("PORT")
+USER_MONGO = os.getenv("USERMONGO")
+PASSW = os.getenv("PASSW")
+DB = os.getenv("DB")
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
