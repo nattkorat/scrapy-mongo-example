@@ -13,5 +13,15 @@ from test_scrapy import model
 class TestScrapyPipeline:
 
     def process_item(self, item, spider):
+        if spider.name != "url_index":
+            data = model.Quotes(**item)
 
+            update_url = model.Urls.objects.get(url=item.get("url", ""))
+            if update_url and not update_url.is_extract:
+                update_url.is_extract = True
+                update_url.save()
+        else:
+            data = model.Urls(**item)
+   
+        data.save()
         return item

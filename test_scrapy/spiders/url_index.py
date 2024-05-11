@@ -1,9 +1,11 @@
+"""
+Url Indexer
+----------
+This spider job is to list all the target URLs
+in the quote to scrape website.
+"""
 import scrapy
-from mongoengine import connect
-
-from test_scrapy import settings
-from test_scrapy import model
-
+from urllib.parse import urlparse
 
 class UrlIndexSpider(scrapy.Spider):
 
@@ -12,13 +14,22 @@ class UrlIndexSpider(scrapy.Spider):
     start_urls = ["https://quotes.toscrape.com/"]
 
     def parse(self, response):
+        """
+        Parse
 
-        # save to database
-        url_data = model.Urls(url=str(response.url))
-        url_data.save()
+        Attribute
+        ---------
+        response: HtmlResponse
+            Response from the spider requests.
         
+        Yield
+        -----
+        Item of Url and domain.
+
+        """
         yield {
-            "url": response.url
+            "url": response.url,
+            "domain": urlparse(response.url).netloc
         }
 
         next_page = response.css(".next a::attr(href)").get()
